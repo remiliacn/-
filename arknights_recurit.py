@@ -7,7 +7,8 @@ import time
 
 AGENT6 = ['能天使', '推进之王', '伊芙利特', '艾雅法拉', '安洁莉娜',
           '闪灵', '夜莺', '星熊', '塞雷娅', '银灰', '斯卡蒂', '风笛',
-          '早露', '赫拉格', '傀影', '煌', '阿', '陈', '麦哲伦', '莫斯提马', '黑', '温蒂']
+          '早露', '赫拉格', '傀影', '煌', '阿', '陈', '麦哲伦', '莫斯提马', '黑',
+          '温蒂', 'W', '铃兰']
 
 AGENT5 = ['白面鸮', '凛冬', '德克萨斯', '芙兰卡', '拉普兰德', '幽灵鲨', '蓝毒',
           '白金', '陨星', '天火', '梅尔', '赫默', '华法琳', '临光',
@@ -49,6 +50,11 @@ class ArkHeadhunt:
         :param offset_setting: Offset that can set for rigging the result.
         :return: void.
         """
+        if self.times < 0:
+            raise ValueError("Pulling value cannot be less than 0")
+
+        self.random_agent.clear()
+        self.random_class.clear()
         random.seed(time.time_ns())
         random_class = []
         self.count += 1
@@ -68,9 +74,9 @@ class ArkHeadhunt:
             time.sleep(0.05)
 
         self.random_class = random_class
-        self.random_agent = self.get_ops()
+        self.random_agent = self._get_ops()
 
-    def get_ops(self) -> list:
+    def _get_ops(self) -> list:
         """
         Get a list of agent's name.
         :return: A list with all operator names.
@@ -112,6 +118,4 @@ class ArkHeadhunt:
                 congrats = '没事这结果挺正常的，会好起来的，哈哈哈哈嗝~'
 
         response += '本次寻访获得了%d个六星干员，%s' % (six_star, congrats)
-        self.random_class.clear()
-        self.random_agent.clear()
         return response
