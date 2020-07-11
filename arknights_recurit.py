@@ -60,7 +60,7 @@ class ArkHeadhunt:
         self.count += 1
         offset = int(self.count / 5) + offset_setting
         for _ in range(0, self.times):
-            rand_num = random.randint(0, 100) + (offset * 2)
+            rand_num = random.randint(1, 101) + (offset * 2)
             if rand_num > 98:
                 random_class.append(6)
                 self.count = 0
